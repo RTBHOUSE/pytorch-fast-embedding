@@ -77,23 +77,23 @@ def test_simple_backward(cuda: bool):
         torch.tensor([[1, 2], [2, 3], [1, 2], [1, 2], [3, 0]], dtype=torch.int64)
     ]
     grad_outputs = [
-        torch.cat([torch.arange(1, 6).view(-1, 1),
-                   torch.arange(1, 6).view(-1, 1) * 10,
-                   torch.arange(1, 6).view(-1, 1) * 100
+        torch.cat([torch.arange(1, 6, dtype=torch.float32).view(-1, 1),
+                   torch.arange(1, 6, dtype=torch.float32).view(-1, 1) * 10,
+                   torch.arange(1, 6, dtype=torch.float32).view(-1, 1) * 100
                    ], 1),
-        torch.cat([torch.arange(1, 6).view(-1, 1),
-                   torch.arange(1, 6).view(-1, 1) * 10,
-                   torch.arange(1, 6).view(-1, 1) * 100
-                   ], 1),
+        torch.cat([torch.arange(1, 6, dtype=torch.float32).view(-1, 1, 1),
+                   torch.arange(1, 6, dtype=torch.float32).view(-1, 1, 1) * 10,
+                   torch.arange(1, 6, dtype=torch.float32).view(-1, 1, 1) * 100
+                   ], 2),
         torch.cat([
             torch.cat([
-                torch.arange(1, 6).view(-1, 1, 1),
-                torch.arange(1, 6).view(-1, 1, 1) * 10,
-                torch.arange(1, 6).view(-1, 1, 1) * 100], 2),
+                torch.arange(1, 6, dtype=torch.float32).view(-1, 1, 1),
+                torch.arange(1, 6, dtype=torch.float32).view(-1, 1, 1) * 10,
+                torch.arange(1, 6, dtype=torch.float32).view(-1, 1, 1) * 100], 2),
             torch.cat([
-                torch.arange(1, 6).view(-1, 1, 1),
-                torch.arange(1, 6).view(-1, 1, 1) * 10,
-                torch.arange(1, 6).view(-1, 1, 1) * 100], 2)
+                torch.arange(1, 6, dtype=torch.float32).view(-1, 1, 1),
+                torch.arange(1, 6, dtype=torch.float32).view(-1, 1, 1) * 10,
+                torch.arange(1, 6, dtype=torch.float32).view(-1, 1, 1) * 100], 2)
         ], 1)
     ]
     expected_grads = [

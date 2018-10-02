@@ -85,7 +85,7 @@ at::Tensor fast_embedding_backward_cpu(
 
   at::checkScalarType("embedding_backward", indices_arg, at::kLong);
 
-  auto d_weights = at::zeros(grads.type(), {num_embeddings, grads.size(-1)});
+  auto d_weights = at::zeros({num_embeddings, grads.size(-1)}, grads.type());
   int64_t size = grads.size(0);
   int64_t embedding_dim = grads.stride(0);
   assert(indices.size(0) == size);
