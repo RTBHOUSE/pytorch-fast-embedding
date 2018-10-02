@@ -14,7 +14,7 @@ Check the [performance benchmark results](#performance-benchmarks) below for mor
 
 ## Installation
 
-The module works with python 3.6 and PyTorch 0.4 only. Due to changes in ATen API, minor changes are needed to use it with PyTorch 0.4.1.
+This module works with Python 3.6 and PyTorch 0.4.1 only. There's also a branch compatible with PyTorch 0.4.0.
 
 In order to use `FastEmbedding` it is sufficient to execute:
 
