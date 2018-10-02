@@ -1,5 +1,5 @@
 #include <ATen/ATen.h>
-#include <ATen/cuda/AccumulateType.cuh>
+#include <ATen/AccumulateType.h>
 #include <ATen/TensorUtils.h>
 #include <THC/THCDeviceUtils.cuh>
 
@@ -18,7 +18,7 @@ __global__ void fast_embedding_backward_kernel(
   int64_t size,
   int64_t embedding_dim) {
 
-  using accscalar_t = at::cuda::acc_type<scalar_t>;
+  using accscalar_t = at::acc_type<scalar_t, true>;
 
   int64_t ix = threadIdx.x;
   int64_t iy = blockIdx.x;
@@ -50,7 +50,7 @@ at::Tensor fast_embedding_backward_cuda_impl(
   at::checkScalarType("embedding_backward", indices_arg, at::kLong);
   at::checkSameGPU("embedding_backward", grads_arg, indices_arg);
 
-  auto d_weights = at::zeros(grads.type(), {num_embeddings, grads.size(-1)});
+  auto d_weights = at::zeros({num_embeddings, grads.size(-1)}, grads.type());
   int64_t size = grads.size(0);
   int64_t embedding_dim = grads.stride(0);
 
